@@ -21,3 +21,5 @@ databaseChangeLog:
               - column:
                   name: roles
                   type: varchar(255)
+        - sql:
+            sql: insert into user (id, emailaddress, password, roles) values ('admin','admin@zzpmatcher.nl','$2a$10$F6q6X3ecZqU2rNSSdCQhsuBnWCosrHhuFRIjQPVN3cd0K0odFxSEu','ROLE_USER,ROLE_ADMIN')

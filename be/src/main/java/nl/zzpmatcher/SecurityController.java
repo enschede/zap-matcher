@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SecurityController {
 
+    private final AuthenticationManager authenticationManager;
+
     @Autowired
-//    @Qualifier(value = "authenticationManager")
-    private AuthenticationManager authenticationManager;
+    public SecurityController(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/public/login")
     public HttpEntity login(@RequestBody UserLoginCommand userLoginCommand) {
@@ -31,7 +34,8 @@ public class SecurityController {
             Authentication auth = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            Resource<String> resource = new Resource<>("");
+            Resource<UserEmailaddressOnlyProjection> resource =
+                    new Resource<>(new UserEmailaddressOnlyProjection(SecurityContextHolder.getContext().getAuthentication().getName()));
             UserResourceAssembler.addLogoutLinks(resource);
             return ResponseEntity.ok(resource);
         } catch (BadCredentialsException ex) {

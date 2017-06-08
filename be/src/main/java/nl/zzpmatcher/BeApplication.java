@@ -21,6 +21,5 @@ public class BeApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... strings) throws Exception {
-		userRepository.save(User.create("marc", "marc", "ROLE_USER"));
 	}
 }
