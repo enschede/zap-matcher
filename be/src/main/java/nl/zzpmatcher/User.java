@@ -1,7 +1,8 @@
 package nl.zzpmatcher;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.UUID;
 
@@ -12,14 +13,16 @@ public class User {
     private String id;
     private String emailaddress;
     private String password;
+    private String roles;
 
     public User() {
     }
 
-    private User(String id, String emailaddress, String password) {
+    private User(String id, String emailaddress, String password, String roles) {
         this.id = id;
         this.emailaddress = emailaddress;
         this.password = password;
+        this.roles = roles;
     }
 
     public String getId() {
@@ -46,7 +49,15 @@ public class User {
         return password;
     }
 
-    public static User create(String emailaddress, String password) {
-        return new User(UUID.randomUUID().toString(), emailaddress, Integer.toString(password.hashCode()));
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public static User create(String emailaddress, String password, String roles) {
+        return new User(UUID.randomUUID().toString(), emailaddress, password, roles);
     }
 }

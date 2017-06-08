@@ -1,5 +1,7 @@
 package nl.zzpmatcher;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import static nl.zzpmatcher.Validator.validate;
 
 public class UserCreateCommand {
@@ -40,6 +42,8 @@ public class UserCreateCommand {
         validate(password != null && password.length() > 0, () -> new RuntimeException("Password is mandatory"));
         validate(password.equals(password2), () -> new RuntimeException("Passwords should be equal"));
 
-        return User.create(emailaddress, password);
+        final String encodedPassword = new BCryptPasswordEncoder().encode(password);
+
+        return User.create(emailaddress, encodedPassword,"ROLE_USER");
     }
 }
