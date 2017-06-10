@@ -1,4 +1,4 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.business;
 
 import org.springframework.data.repository.CrudRepository;
 

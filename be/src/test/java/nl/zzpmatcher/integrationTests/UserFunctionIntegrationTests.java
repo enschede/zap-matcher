@@ -1,6 +1,8 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.integrationTests;
 
-import org.hamcrest.CoreMatchers;
+import nl.zzpmatcher.business.UserManagementTest;
+import nl.zzpmatcher.business.UserRegisterCommand;
+import nl.zzpmatcher.business.UserLoginCommand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserFunctionTests {
+public class UserFunctionIntegrationTests {
 
     @LocalServerPort
     private int port = 0;
@@ -30,55 +32,55 @@ public class UserFunctionTests {
 
     @Test
     public void successfulRegisterNewuser() {
-        final ResponseEntity<AdminFunctionTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
                 buildUserCreateCommand("marc@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
         assertThat(registerResponse.getStatusCodeValue(), equalTo(200));
     }
 
     @Test
     public void doubleRegisterNewuser() {
-        final ResponseEntity<AdminFunctionTests.LoginResponse> registerResponse1 = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse1 = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
                 buildUserCreateCommand("marc1@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
-        final ResponseEntity<AdminFunctionTests.LoginResponse> registerResponse2 = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse2 = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
                 buildUserCreateCommand("marc1@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
-        assertThat(registerResponse2.getStatusCodeValue(), equalTo(500));
+        assertThat(registerResponse2.getStatusCodeValue(), equalTo(409));
     }
 
     @Test
     public void successfulLoginAsUser() {
-        final ResponseEntity<AdminFunctionTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
                 buildUserCreateCommand("marc2@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
-        final ResponseEntity<AdminFunctionTests.LoginResponse> loginResponse = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> loginResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/login",
                 buidUserLoginCommand("marc2@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
         assertThat(loginResponse.getStatusCodeValue(), equalTo(200));
     }
 
     @Test
     public void fetchingUserlistFails() {
-        final ResponseEntity<AdminFunctionTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
                 buildUserCreateCommand("marc2@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
-        final ResponseEntity<AdminFunctionTests.LoginResponse> loginResponse = this.testRestTemplate.postForEntity(
+        final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> loginResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/login",
                 buidUserLoginCommand("marc2@marc.nl", "guest"),
-                AdminFunctionTests.LoginResponse.class);
+                AdminFunctionIntegrationTests.LoginResponse.class);
 
         final String cookie = getCookieFromResponse(loginResponse);
 
@@ -96,17 +98,11 @@ public class UserFunctionTests {
         return userLoginCommand;
     }
 
-    private UserCreateCommand buildUserCreateCommand(String username, String password) {
-        UserCreateCommand userCreateCommand = new UserCreateCommand();
-
-        userCreateCommand.setEmailaddress(username);
-        userCreateCommand.setPassword(password);
-        userCreateCommand.setPassword2(password);
-
-        return userCreateCommand;
+    private UserRegisterCommand buildUserCreateCommand(String username, String password) {
+        return UserManagementTest.UserRegisterCommandBuilder.build(username, password, password);
     }
 
-    private String getCookieFromResponse(ResponseEntity<AdminFunctionTests.LoginResponse> loginResponseResponseEntity) {
+    private String getCookieFromResponse(ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> loginResponseResponseEntity) {
         return loginResponseResponseEntity.getHeaders().get("Set-Cookie").get(0);
     }
 

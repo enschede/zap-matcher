@@ -1,5 +1,7 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.security;
 
+import nl.zzpmatcher.business.User;
+import nl.zzpmatcher.business.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,12 +46,7 @@ public class SecurityBeans {
                     }
 
                     private GrantedAuthority mapToGrantedAuthority(String role) {
-                        return new GrantedAuthority() {
-                            @Override
-                            public String getAuthority() {
-                                return role;
-                            }
-                        };
+                        return (GrantedAuthority) () -> role;
                     }
 
                     private String[] getIndividualRoles() {

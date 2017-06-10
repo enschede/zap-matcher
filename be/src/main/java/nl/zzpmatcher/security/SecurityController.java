@@ -1,7 +1,9 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.security;
 
+import nl.zzpmatcher.controllers.user.UserEmailaddressOnlyProjection;
+import nl.zzpmatcher.business.UserLoginCommand;
+import nl.zzpmatcher.controllers.user.UserResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;

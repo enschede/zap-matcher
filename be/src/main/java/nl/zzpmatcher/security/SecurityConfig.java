@@ -1,4 +1,4 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.security;
 
 import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

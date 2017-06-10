@@ -1,22 +1,23 @@
 package nl.zzpmatcher;
 
+import nl.zzpmatcher.business.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BeApplication implements CommandLineRunner{
+public class ZzpMatcherApplication implements CommandLineRunner{
 
 	private final UserRepository userRepository;
 
 	@Autowired
-	public BeApplication(UserRepository userRepository) {
+	public ZzpMatcherApplication(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(BeApplication.class, args);
+		SpringApplication.run(ZzpMatcherApplication.class, args);
 	}
 
 	@Override

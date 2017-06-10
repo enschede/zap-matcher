@@ -1,4 +1,4 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.controllers.user;
 
 public class UserEmailaddressOnlyProjection {
 

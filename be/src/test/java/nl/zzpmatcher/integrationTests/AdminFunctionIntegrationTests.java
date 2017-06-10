@@ -1,5 +1,6 @@
-package nl.zzpmatcher;
+package nl.zzpmatcher.integrationTests;
 
+import nl.zzpmatcher.business.UserLoginCommand;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AdminFunctionTests {
+public class AdminFunctionIntegrationTests {
 
 	@LocalServerPort
 	private int port = 0;
@@ -88,7 +89,7 @@ public class AdminFunctionTests {
 	public static class LoginResponse {
 		private String emailaddress;
 
-		public String getEmailaddress() {
+		String getEmailaddress() {
 			return emailaddress;
 		}
 	}
