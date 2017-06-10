@@ -9,30 +9,30 @@ public class UserRegisterCommand {
     private String password;
     private String password2;
 
-    UserRegisterCommand() {
+    public UserRegisterCommand() {
     }
 
-    String getEmailaddress() {
+    public String getEmailaddress() {
         return emailaddress;
     }
 
-    void setEmailaddress(String emailaddress) {
+    public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
     }
 
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    String getPassword2() {
+    public String getPassword2() {
         return password2;
     }
 
-    void setPassword2(String password2) {
+    public void setPassword2(String password2) {
         this.password2 = password2;
     }
 

@@ -89,7 +89,7 @@ public class AdminFunctionIntegrationTests {
 	public static class LoginResponse {
 		private String emailaddress;
 
-		String getEmailaddress() {
+		public String getEmailaddress() {
 			return emailaddress;
 		}
 	}
