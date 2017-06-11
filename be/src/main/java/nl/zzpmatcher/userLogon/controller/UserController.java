@@ -1,9 +1,9 @@
-package nl.zzpmatcher.controllers.user;
+package nl.zzpmatcher.userLogon.controller;
 
-import nl.zzpmatcher.business.User;
-import nl.zzpmatcher.business.UserManagement;
-import nl.zzpmatcher.business.UserRegisterCommand;
-import nl.zzpmatcher.business.UserRepository;
+import nl.zzpmatcher.userLogon.business.User;
+import nl.zzpmatcher.userLogon.business.UserManagement;
+import nl.zzpmatcher.userLogon.business.UserRegisterCommand;
+import nl.zzpmatcher.userLogon.business.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;

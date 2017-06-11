@@ -1,6 +1,6 @@
 package nl.zzpmatcher.integrationTests;
 
-import nl.zzpmatcher.business.UserLoginCommand;
+import nl.zzpmatcher.userLogon.business.UserLoginCommand;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;

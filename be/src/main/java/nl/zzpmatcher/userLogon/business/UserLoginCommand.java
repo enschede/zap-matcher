@@ -1,4 +1,4 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
 public class UserLoginCommand {
 

@@ -1,7 +1,7 @@
-package nl.zzpmatcher.security;
+package nl.zzpmatcher.userLogon.security;
 
-import nl.zzpmatcher.business.User;
-import nl.zzpmatcher.business.UserRepository;
+import nl.zzpmatcher.userLogon.business.User;
+import nl.zzpmatcher.userLogon.business.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;

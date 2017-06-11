@@ -15,11 +15,56 @@ databaseChangeLog:
               - column:
                   name: emailaddress
                   type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
               - column:
                   name: password
-                  type: varchar(255)
+                  type: varchar(60)
               - column:
                   name: roles
                   type: varchar(255)
         - sql:
             sql: insert into user (id, emailaddress, password, roles) values ('admin','admin@zzpmatcher.nl','$2a$10$F6q6X3ecZqU2rNSSdCQhsuBnWCosrHhuFRIjQPVN3cd0K0odFxSEu','ROLE_USER,ROLE_ADMIN')
+
+  - changeSet:
+      id: 2
+      author: marc
+      changes:
+        - createTable:
+            tableName: profile
+            columns:
+              - column:
+                  name: id
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: emailaddress
+                  type: varchar(50)
+        - createTable:
+            tableName: tag
+            columns:
+              - column:
+                  name: id
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: profile_id
+                  type: varchar(50)
+              - column:
+                  name: name
+                  type: varchar(50)
+        # Verwijzing naar een PK, die is per definitie uniek
+        - addForeignKeyConstraint:
+            baseColumnNames: profile_id
+            baseTableName: tag
+            constraintName: fk_profile_id
+            referencedColumnNames: id
+            referencedTableName: profile
+
+        - sql:
+            sql: insert into profile (id, emailaddress) values ('admin','admin@zzpmatcher.nl')

@@ -1,4 +1,4 @@
-package nl.zzpmatcher.business.utils;
+package nl.zzpmatcher.utils;
 
 import java.util.function.Supplier;
 

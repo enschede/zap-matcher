@@ -1,6 +1,5 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -12,12 +11,12 @@ public class UserRegisterCommandTest {
     public void createUser() throws Exception {
 
         final UserRegisterCommand userRegisterCommand = new UserRegisterCommand();
-        userRegisterCommand.setEmailaddress("user@domain.com");
+        userRegisterCommand.setEmailaddress("controller@domain.com");
         userRegisterCommand.setPassword("password");
 
         final User user = userRegisterCommand.createUser();
 
-        assertThat(user.getEmailaddress(), equalTo("user@domain.com"));
+        assertThat(user.getEmailaddress(), equalTo("controller@domain.com"));
         assertThat(user.getPassword().length(), equalTo(60));
     }
 

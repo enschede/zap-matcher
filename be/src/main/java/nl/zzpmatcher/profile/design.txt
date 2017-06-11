@@ -1,0 +1,8 @@
+User stories
+- * Maak profile
+- Update profile
+- Verwijder profile
+
+Def Profile:
+- Profile id / user ref / * tags
+

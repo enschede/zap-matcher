@@ -1,4 +1,4 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +13,7 @@ public class User {
     private String password;
     private String roles;
 
-    User() {
+    public User() {
     }
 
     private User(String id, String emailaddress, String password, String roles) {

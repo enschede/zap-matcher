@@ -1,4 +1,4 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -36,7 +36,7 @@ public class UserRegisterCommand {
         this.password2 = password2;
     }
 
-    User createUser() {
+    public User createUser() {
 
         final String encodedPassword = new BCryptPasswordEncoder().encode(password);
 

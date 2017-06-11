@@ -1,6 +1,6 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
-import static nl.zzpmatcher.business.utils.Validator.validate;
+import static nl.zzpmatcher.utils.Validator.validate;
 
 public class UserManagement {
 
@@ -36,13 +36,13 @@ public class UserManagement {
         }
     }
 
-    class PasswordMandatoryException extends RuntimeException {
+    public class PasswordMandatoryException extends RuntimeException {
         PasswordMandatoryException() {
             super("PasswordMandatoryException");
         }
     }
 
-    class PasswordShouldBeEqual extends RuntimeException {
+    public class PasswordShouldBeEqual extends RuntimeException {
         PasswordShouldBeEqual() {
             super("PasswordShouldBeEqual");
         }

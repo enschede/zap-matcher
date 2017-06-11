@@ -1,9 +1,9 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    public User findUserByEmailaddress(String emailAddress);
+    User findUserByEmailaddress(String emailAddress);
 
 }

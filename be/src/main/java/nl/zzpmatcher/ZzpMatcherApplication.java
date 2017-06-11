@@ -1,6 +1,6 @@
 package nl.zzpmatcher;
 
-import nl.zzpmatcher.business.UserRepository;
+import nl.zzpmatcher.userLogon.business.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

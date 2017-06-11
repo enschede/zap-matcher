@@ -1,4 +1,4 @@
-package nl.zzpmatcher.business;
+package nl.zzpmatcher.userLogon.business;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;

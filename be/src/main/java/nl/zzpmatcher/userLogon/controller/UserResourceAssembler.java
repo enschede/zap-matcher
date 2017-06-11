@@ -1,7 +1,6 @@
-package nl.zzpmatcher.controllers.user;
+package nl.zzpmatcher.userLogon.controller;
 
-import nl.zzpmatcher.business.User;
-import nl.zzpmatcher.security.SecurityController;
+import nl.zzpmatcher.userLogon.business.User;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.Resources;
@@ -20,8 +19,8 @@ public class UserResourceAssembler implements ResourceAssembler<User, Resource<U
         return userResource;
     }
 
-    public static void addLogoutLinks(Resource resource) {
-        resource.add(ControllerLinkBuilder.linkTo(SecurityController.class).slash("user").slash("logout").withRel("logout"));
+    private static void addLogoutLinks(Resource resource) {
+        resource.add(ControllerLinkBuilder.linkTo(SecurityController.class).slash("controller").slash("logout").withRel("logout"));
     }
 
     public Resources<User> toResources(Iterable<User> users) {
@@ -34,7 +33,7 @@ public class UserResourceAssembler implements ResourceAssembler<User, Resource<U
     }
 
     public static void addLogoutLinks(Resources resources) {
-        resources.add(ControllerLinkBuilder.linkTo(SecurityController.class).slash("user").slash("logout").withRel("logout"));
+        resources.add(ControllerLinkBuilder.linkTo(SecurityController.class).slash("controller").slash("logout").withRel("logout"));
     }
 
     public Resource<UserEmailaddressOnlyProjection> toEmailAddressOnlyProjection(User createdUser) {
