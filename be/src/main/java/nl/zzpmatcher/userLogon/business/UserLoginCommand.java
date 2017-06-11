@@ -1,26 +1,9 @@
 package nl.zzpmatcher.userLogon.business;
 
-public class UserLoginCommand {
+import lombok.Data;
 
+@Data
+public class UserLoginCommand {
     private String username;
     private String password;
-
-    public UserLoginCommand() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

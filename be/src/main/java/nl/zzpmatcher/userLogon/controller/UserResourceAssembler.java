@@ -19,7 +19,7 @@ public class UserResourceAssembler implements ResourceAssembler<User, Resource<U
         return userResource;
     }
 
-    private static void addLogoutLinks(Resource resource) {
+    public static void addLogoutLinks(Resource resource) {
         resource.add(ControllerLinkBuilder.linkTo(SecurityController.class).slash("controller").slash("logout").withRel("logout"));
     }
 
