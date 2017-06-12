@@ -1,1 +1,7 @@
 target/
+
+.idea
+*.iml
+
+fe/node_modules
+
