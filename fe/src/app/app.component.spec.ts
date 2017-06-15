@@ -1,13 +1,28 @@
-import { TestBed, async } from '@angular/core/testing';
+import {TestBed, async} from '@angular/core/testing';
+import {BaseRequestOptions, Http} from '@angular/http';
+import {MockBackend} from '@angular/http/testing';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {RegistrationService} from '../service/index';
+import {RegistrationComponent} from '../component/index';
+
+export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
+  return new Http(backend, options);
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        RegistrationComponent
       ],
+      providers: [
+        BaseRequestOptions,
+        {provide: Http, useFactory:httpFactory, deps: [MockBackend, BaseRequestOptions]},
+        MockBackend,
+        RegistrationService
+      ]
     }).compileComponents();
   }));
 
