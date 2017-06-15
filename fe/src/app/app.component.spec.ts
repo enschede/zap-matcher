@@ -1,10 +1,11 @@
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestBed, async} from '@angular/core/testing';
 import {BaseRequestOptions, Http} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 
 import {AppComponent} from './app.component';
-import {RegistrationService} from '../service/index';
-import {RegistrationComponent} from '../component/index';
+import {LoginService, RegistrationService} from '../service/index';
+import {LoginComponent, RegistrationComponent} from '../component/index';
 
 export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
   return new Http(backend, options);
@@ -13,13 +14,19 @@ export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        ReactiveFormsModule
+      ],
       declarations: [
         AppComponent,
+        LoginComponent,
         RegistrationComponent
       ],
       providers: [
         BaseRequestOptions,
-        {provide: Http, useFactory:httpFactory, deps: [MockBackend, BaseRequestOptions]},
+        {provide: Http, useFactory: httpFactory, deps: [MockBackend, BaseRequestOptions]},
+        LoginService,
         MockBackend,
         RegistrationService
       ]

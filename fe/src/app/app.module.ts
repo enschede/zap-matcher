@@ -1,23 +1,25 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {RegistrationService} from '../service/index';
-import {RegistrationComponent} from '../component/index';
+import {LoginService, RegistrationService} from '../service/index';
+import {LoginComponent, RegistrationComponent} from '../component/index';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     RegistrationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
-  providers: [RegistrationService],
+  providers: [LoginService, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
