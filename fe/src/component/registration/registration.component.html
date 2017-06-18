@@ -1,15 +1,21 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
   <fieldset>
     <legend>Registratie</legend>
     <label for="emailaddress">Email:</label>
-    <input id="emailaddress" formControlName="emailaddress" type="email" email required /><br />
+    <input id="emailaddress" formControlName="emailaddress" type="email"  />
+    <span *ngIf="form.controls.emailaddress.dirty && form.controls.emailaddress.errors?.required" class="error">Field is required</span>
+    <span *ngIf="form.controls.emailaddress.dirty && form.controls.emailaddress.errors?.email" class="error">Field is should be an email address</span>
+    <br />
 
     <label for="password">Wachtwoord:</label>
-    <input id="password" formControlName="password" type="password" required /><br />
+    <input id="password" formControlName="password" type="password" /><br />
+    <span *ngIf="form.controls.password.dirty && form.controls.password.errors?.required" class="error">Field is required</span>
 
     <label for="password2">Herhaal wachtwoord:</label>
-    <input id="password2" formControlName="password2" type="password" required /><br />
+    <input id="password2" formControlName="password2" type="password" /><br />
+    <span *ngIf="form.controls.password2.dirty && form.controls.password2.errors?.required" class="error">Field is required</span>
+    <span *ngIf="form.controls.password2.dirty && form.controls.password2.errors?.email" class="error">Field is should equal the other password</span>
 
-    <button type="submit" [disabled]="!registerForm.valid">Registreer</button>
+    <button type="submit" [disabled]="!form.valid">Registreer</button>
   </fieldset>
 </form>

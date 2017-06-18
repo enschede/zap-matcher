@@ -8,12 +8,12 @@ import {LoginService, RememberMeService} from '../../service/index';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  form: FormGroup;
 
   constructor(private loginService: LoginService, private rememberMeService: RememberMeService) {
     const emailaddress = this.rememberMeService.recall();
 
-    this.loginForm = new FormGroup({
+    this.form = new FormGroup({
       emailaddress: new FormControl(emailaddress, [Validators.required, Validators.minLength(5), Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });

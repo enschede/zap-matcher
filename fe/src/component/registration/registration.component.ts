@@ -11,26 +11,26 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnDestroy {
-  registerForm: FormGroup;
+  form: FormGroup;
   registrationSubscription: Subscription;
 
   constructor(private registrationService: RegistrationService,
               private rememberMeService: RememberMeService,
               private router: Router) {
 
-    this.registerForm = new FormGroup({
+    this.form = new FormGroup({
       emailaddress: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      password2: new FormControl(null, [Validators.required, Validators.minLength(5)])
+      password2: new FormControl(null, [Validators.required])
     });
   }
 
   onSubmit(): boolean {
-    if (this.registerForm.valid) {
+    if (this.form.valid) {
       const command = new UserRegisterCommand(
-        this.registerForm.value['emailaddress'],
-        this.registerForm.value['password'],
-        this.registerForm.value['password2']
+        this.form.value['emailaddress'],
+        this.form.value['password'],
+        this.form.value['password2']
       );
       console.log('Submitting' + command);
       this.registrationSubscription =
