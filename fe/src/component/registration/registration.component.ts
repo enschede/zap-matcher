@@ -1,6 +1,7 @@
-import {Component, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {RegistrationService} from '../../service/index';
+import {Component, OnDestroy} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {RegistrationService, RememberMeService} from '../../service/index';
 import {UserRegisterCommand} from '../../command/index';
 import {Subscription} from 'rxjs';
 
@@ -9,28 +10,43 @@ import {Subscription} from 'rxjs';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent {
-  @ViewChild('registerForm') registerForm: NgForm;
-  emailaddress: string;
-  password: string;
-  password2: string;
+export class RegistrationComponent implements OnDestroy {
+  registerForm: FormGroup;
   registrationSubscription: Subscription;
 
-  constructor(private registrationService: RegistrationService) {}
+  constructor(private registrationService: RegistrationService,
+              private rememberMeService: RememberMeService,
+              private router: Router) {
+
+    this.registerForm = new FormGroup({
+      emailaddress: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      password2: new FormControl(null, [Validators.required, Validators.minLength(5)])
+    });
+  }
 
   onSubmit(): boolean {
     if (this.registerForm.valid) {
       const command = new UserRegisterCommand(
-        this.emailaddress,
-        this.password,
-        this.password2
+        this.registerForm.value['emailaddress'],
+        this.registerForm.value['password'],
+        this.registerForm.value['password2']
       );
       console.log('Submitting' + command);
       this.registrationSubscription =
-        this.registrationService.register(command).subscribe(() => {
+        this.registrationService.register(command).subscribe((json: any) => {
+          this.rememberMeService.remember(json.emailaddress);
+          this.router.navigate(['login']);
         });
     }
 
     return false;
+  }
+
+  ngOnDestroy() {
+    if (this.registrationSubscription) {
+      this.registrationSubscription.unsubscribe();
+      this.registrationSubscription = null;
+    }
   }
 }

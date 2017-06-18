@@ -2,9 +2,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestBed, async} from '@angular/core/testing';
 import {BaseRequestOptions, Http} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 import {AppComponent} from './app.component';
-import {LoginService, RegistrationService} from '../service/index';
+import {LoginService, RegistrationService, RememberMeService} from '../service/index';
 import {LoginComponent, RegistrationComponent} from '../component/index';
 
 export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterTestingModule
       ],
       declarations: [
         AppComponent,
@@ -28,7 +30,8 @@ describe('AppComponent', () => {
         {provide: Http, useFactory: httpFactory, deps: [MockBackend, BaseRequestOptions]},
         LoginService,
         MockBackend,
-        RegistrationService
+        RegistrationService,
+        RememberMeService
       ]
     }).compileComponents();
   }));
@@ -39,16 +42,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
-  }));
-
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    expect(compiled.querySelector('h1').textContent).toContain('ZZP Matcher');
   }));
 });

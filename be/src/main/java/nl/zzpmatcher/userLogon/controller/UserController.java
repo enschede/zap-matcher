@@ -36,6 +36,7 @@ public class UserController {
 
     }
 
+    @CrossOrigin(origins = "http://local.zzpmatcher.nl:4200")
     @PostMapping("/public/createUser")
     public Resource postCreateUser(@RequestBody UserRegisterCommand userRegisterCommand) {
 

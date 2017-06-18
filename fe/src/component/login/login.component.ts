@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {LoginService} from '../../service/index';
+import {LoginService, RememberMeService} from '../../service/index';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +10,11 @@ import {LoginService} from '../../service/index';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private rememberMeService: RememberMeService) {
+    const emailaddress = this.rememberMeService.recall();
 
     this.loginForm = new FormGroup({
-      emailaddress: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.email]),
+      emailaddress: new FormControl(emailaddress, [Validators.required, Validators.minLength(5), Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
   }
