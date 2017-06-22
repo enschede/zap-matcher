@@ -13,7 +13,7 @@ import java.util.List;
 public class Profile {
     @Id
     private String id;
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<Tag> tags;
 
 }

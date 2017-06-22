@@ -1,5 +1,6 @@
 package nl.zzpmatcher.profile.controller;
 
+import nl.zzpmatcher.profile.business.Profile;
 import nl.zzpmatcher.profile.business.ProfileManagement;
 import nl.zzpmatcher.profile.business.UpdateProfileCommand;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,19 @@ public class ProfileController {
     }
 
     @PostMapping("/user/profile")
-    public HttpEntity postProfile(@RequestBody UpdateProfileCommand updateProfileCommand) {
+    public HttpEntity<ProfileProjection> postProfile(@RequestBody UpdateProfileCommand updateProfileCommand) {
 
-        new ProfileManagement(profileRepository).updateProfile(updateProfileCommand);
+        final Profile profile = new ProfileManagement(profileRepository).updateProfile(updateProfileCommand);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ProfileProjection.of(profile));
+    }
+
+    @GetMapping("/user/profile")
+    public HttpEntity<ProfileProjection> getProfile() {
+
+        final Profile profile = new ProfileManagement(profileRepository).getProfile();
+
+        return ResponseEntity.ok(ProfileProjection.of(profile));
     }
 
     @ExceptionHandler(ProfileManagement.InvalidUsernameException.class)

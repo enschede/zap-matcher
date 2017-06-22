@@ -14,12 +14,20 @@ public class ProfileManagement {
         this.profileRepository = profileRepository;
     }
 
-    public void updateProfile(UpdateProfileCommand updateProfileCommand) {
+    public Profile updateProfile(UpdateProfileCommand updateProfileCommand) {
         validate(isUsernameEqualToLoggedOnUser(updateProfileCommand), InvalidUsernameException::new);
 
         final Profile profile = ProfileBuilder.build(updateProfileCommand);
 
         profileRepository.save(profile);
+
+        return profile;
+    }
+
+    public Profile getProfile() {
+        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return profileRepository.findOne(username);
     }
 
     private boolean isUsernameEqualToLoggedOnUser(@RequestBody UpdateProfileCommand updateProfileCommand) {

@@ -1,0 +1,4 @@
+Create user:
+curl -X POST -H "Content-Type: application/json" -d '{"emailaddress":"marc@marc.com","password":"ap","password2":"ap"}' http://localhost:8080/public/createUser
+
+
