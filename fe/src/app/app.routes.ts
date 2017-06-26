@@ -1,11 +1,12 @@
 import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {CombinedLoginRegistrationComponent, LoginComponent} from '../component/index';
+import {AccountPageComponent, LoginPageComponent, WelcomePageComponent} from '../page/index';
 
 
 const appRoutes: Routes = [
-  {path: '', component: CombinedLoginRegistrationComponent},
-  {path: 'login', component: LoginComponent}
+  {path: '', component: WelcomePageComponent},
+  {path: 'login', component: LoginPageComponent},
+  {path: 'account', component: AccountPageComponent}
 ];
 
 export const appRoutingProviders: any[] = [];

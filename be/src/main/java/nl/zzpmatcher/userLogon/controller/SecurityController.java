@@ -10,10 +10,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SecurityController {
@@ -25,6 +22,7 @@ public class SecurityController {
         this.authenticationManager = authenticationManager;
     }
 
+    @CrossOrigin(origins = "http://local.zzpmatcher.nl:4200")
     @PostMapping("/public/login")
     public HttpEntity login(@RequestBody UserLoginCommand userLoginCommand) {
         UsernamePasswordAuthenticationToken token =

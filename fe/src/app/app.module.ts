@@ -4,19 +4,25 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {LoginService, RegistrationService, RememberMeService} from '../service/index';
-import {CombinedLoginRegistrationComponent, LoginComponent, RegistrationComponent} from '../component/index';
+import {LoginService, ProfileService, RegistrationService, RememberMeService} from '../service/index';
+import {AccountPageComponent, LoginPageComponent, WelcomePageComponent} from '../page/index';
+import {LoginComponent, RegistrationComponent} from '../component/index';
 import {appRoutingProviders, routing} from './app.routes';
 
 const PROVIDERS = [
   appRoutingProviders,
-  LoginService, RegistrationService, RememberMeService
+  LoginService,
+  ProfileService,
+  RegistrationService,
+  RememberMeService
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    CombinedLoginRegistrationComponent,
+    AccountPageComponent,
+    LoginPageComponent,
+    WelcomePageComponent,
     LoginComponent,
     RegistrationComponent
   ],

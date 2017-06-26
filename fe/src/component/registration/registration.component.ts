@@ -35,7 +35,8 @@ export class RegistrationComponent implements OnDestroy {
       console.log('Submitting' + command);
       this.registrationSubscription =
         this.registrationService.register(command).subscribe((json: any) => {
-          this.rememberMeService.remember(json.emailaddress);
+          this.rememberMeService.rememberUsername(json.emailaddress);
+          this.rememberMeService.rememberPassword(command.password);
           this.router.navigate(['login']);
         });
     }

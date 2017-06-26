@@ -11,10 +11,8 @@ export class RegistrationService {
   constructor(private http: Http) {}
 
   register(command: UserRegisterCommand): Observable<any> {
-    console.log(command);
     return this.http.post(environment.apiUrl + '/public/createUser', command)
       .map((res: Response) => res.json());
-
   }
 
 }

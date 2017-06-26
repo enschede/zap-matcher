@@ -3,21 +3,35 @@ import {BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class RememberMeService {
-  emailaddress$: BehaviorSubject<string>;
+  username$: BehaviorSubject<string>;
+  password$: BehaviorSubject<string>;
 
   constructor() {
-    this.emailaddress$ = new BehaviorSubject(null);
+    this.username$ = new BehaviorSubject(null);
+    this.password$ = new BehaviorSubject(null);
   }
 
-  remember(emailaddress: string) {
-    this.emailaddress$.next(emailaddress);
+  rememberUsername(username: string) {
+    this.username$.next(username);
   }
 
-  forget() {
-    this.emailaddress$.next(null);
+  forgetUsername() {
+    this.username$.next(null);
   }
 
-  recall(): string {
-    return this.emailaddress$.getValue();
+  recallUsername(): string {
+    return this.username$.getValue();
+  }
+
+  rememberPassword(password: string) {
+    this.password$.next(password);
+  }
+
+  forgetPassword() {
+    this.password$.next(null);
+  }
+
+  recallPassword(): string {
+    return this.password$.getValue();
   }
 }
