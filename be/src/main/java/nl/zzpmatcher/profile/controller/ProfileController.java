@@ -21,7 +21,6 @@ public class ProfileController {
         this.profileRepository = profileRepository;
     }
 
-    @CrossOrigin(origins = "http://local.zzpmatcher.nl:4200")
     @PostMapping("/user/profile")
     public HttpEntity<ProfileProjection> postProfile(@RequestBody UpdateProfileCommand updateProfileCommand) {
 
@@ -30,7 +29,6 @@ public class ProfileController {
         return ResponseEntity.ok(ProfileProjection.of(profile));
     }
 
-    @CrossOrigin(origins = "http://local.zzpmatcher.nl:4200")
     @GetMapping("/user/profile")
     public HttpEntity<ProfileProjection> getProfile() {
 

@@ -1,0 +1,67 @@
+
+Source: http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-lion/
+
+1. Install brew if not available
+2. brew install nginx
+3. sudo nginx
+4. sudo nginx -s stop
+
+
+Virtual host configuration:
+
+    map $http_upgrade $connection_upgrade {
+        default upgrade;
+        '' close;
+    }
+
+    upstream zzpfe {
+        server 127.0.0.1:4200;
+    }
+
+    upstream zzpbe {
+        server 127.0.0.1:8080;
+    }
+
+    server {
+        listen 80;
+        listen 443 default_server ssl;
+        server_name local.zzpmatcher.nl;
+
+        location /public/ {
+            proxy_pass http://zzpbe/public/;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Real-Port $server_port;
+            proxy_set_header X-Real-Scheme $scheme;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_buffering off;
+        }
+
+        location /user/ {
+            proxy_pass http://zzpbe/user/;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Real-Port $server_port;
+            proxy_set_header X-Real-Scheme $scheme;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_buffering off;
+        }
+
+        location / {
+            proxy_pass http://zzpfe/;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Real-Port $server_port;
+            proxy_set_header X-Real-Scheme $scheme;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection $connection_upgrade;
+            proxy_buffering off;
+        }
+    }
+
+

@@ -22,7 +22,6 @@ public class SecurityController {
         this.authenticationManager = authenticationManager;
     }
 
-    @CrossOrigin(origins = "http://local.zzpmatcher.nl:4200")
     @PostMapping("/public/login")
     public HttpEntity login(@RequestBody UserLoginCommand userLoginCommand) {
         UsernamePasswordAuthenticationToken token =

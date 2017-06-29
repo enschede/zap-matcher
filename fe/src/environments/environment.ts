@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://local.zzpmatcher.nl:8080'
+  apiUrl: 'http://local.zzpmatcher.nl'
 };

@@ -11,10 +11,7 @@ export class ProfileService {
   constructor(private http: Http) {}
 
   getProfile(): Observable<any> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = new RequestOptions({ headers: headers, withCredentials: true });
-    return this.http.get(environment.apiUrl + '/user/profile', options)
+    return this.http.get(environment.apiUrl + '/user/profile', { withCredentials: true })
       .map((res: Response) => res.json());
   }
 
