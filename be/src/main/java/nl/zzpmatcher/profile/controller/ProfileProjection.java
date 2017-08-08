@@ -2,6 +2,7 @@ package nl.zzpmatcher.profile.controller;
 
 import lombok.Data;
 import nl.zzpmatcher.profile.business.Profile;
+import nl.zzpmatcher.profile.business.Tag;
 
 @Data
 public class ProfileProjection {
@@ -9,7 +10,10 @@ public class ProfileProjection {
     private final String[] tags;
 
     public static ProfileProjection of(Profile profile) {
-        final String[] tags = profile.getTags().stream().map(tag -> tag.getId()).toArray(String[]::new);
+        if(profile==null)
+            return null;
+
+        final String[] tags = profile.getTags().stream().map(Tag::getId).toArray(String[]::new);
 
         return new ProfileProjection(profile.getId(), tags);
     }

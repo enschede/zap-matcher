@@ -46,7 +46,7 @@ public class SecurityBeans {
                     }
 
                     private GrantedAuthority mapToGrantedAuthority(String role) {
-                        return (GrantedAuthority) () -> role;
+                        return () -> role;
                     }
 
                     private String[] getIndividualRoles() {
@@ -55,7 +55,7 @@ public class SecurityBeans {
 
                     @Override
                     public String getPassword() {
-                        return user.getPassword();
+                        return user != null ? user.getPassword() : null;
                     }
 
                     @Override

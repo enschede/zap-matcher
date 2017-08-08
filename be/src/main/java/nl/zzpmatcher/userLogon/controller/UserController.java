@@ -52,4 +52,11 @@ public class UserController {
         Resources<User> userResource = userResourceAssembler.toResources(users);
         return ResponseEntity.ok(userResource);
     }
+
+    // TODO: voor debug acties, daarna verwijderen
+    @GetMapping("/public/all")
+    public Iterable<User> getAllProfiles() {
+        final Iterable<User> users = userRepository.findAll();
+        return users;
+    }
 }
