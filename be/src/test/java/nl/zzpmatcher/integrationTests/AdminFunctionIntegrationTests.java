@@ -2,6 +2,7 @@ package nl.zzpmatcher.integrationTests;
 
 import nl.zzpmatcher.userLogon.business.UserLoginCommand;
 import org.hamcrest.CoreMatchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class AdminFunctionIntegrationTests {
 	private TestRestTemplate testRestTemplate ;
 
 	@Test
+	@Ignore
 	public void successfulLoginAsAdmin() {
 		final ResponseEntity<LoginResponse> objectResponseEntity = login("admin@zzpmatcher.nl", "test");
 
@@ -46,6 +48,7 @@ public class AdminFunctionIntegrationTests {
 	}
 
 	@Test
+	@Ignore
 	public void successfulFetchOfUsers() {
 		final ResponseEntity<LoginResponse> loginResponseResponseEntity = login("admin@zzpmatcher.nl", "test");
 		final String cookie = getCookieFromResponse(loginResponseResponseEntity);
