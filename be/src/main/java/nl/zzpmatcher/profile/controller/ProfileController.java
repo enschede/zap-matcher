@@ -2,6 +2,7 @@ package nl.zzpmatcher.profile.controller;
 
 import nl.zzpmatcher.profile.business.Profile;
 import nl.zzpmatcher.profile.business.ProfileManagement;
+import nl.zzpmatcher.profile.business.Tag;
 import nl.zzpmatcher.profile.business.UpdateProfileCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -10,21 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @RestController
 public class ProfileController {
 
-    private ProfileRepository profileRepository;
+    private final ProfileManagement profileManagement;
 
     @Autowired
     public ProfileController(ProfileRepository profileRepository) {
-        this.profileRepository = profileRepository;
+        profileManagement = new ProfileManagement(profileRepository);
     }
 
     @PostMapping("/user/profile")
     public HttpEntity<ProfileProjection> postProfile(@RequestBody UpdateProfileCommand updateProfileCommand) {
 
-        final Profile profile = new ProfileManagement(profileRepository).updateProfile(updateProfileCommand);
+        final Profile profile = profileManagement.updateProfile(updateProfileCommand);
 
         return ResponseEntity.ok(ProfileProjection.of(profile));
     }
@@ -32,9 +34,20 @@ public class ProfileController {
     @GetMapping("/user/profile")
     public HttpEntity<ProfileProjection> getProfile() {
 
-        final Profile profile = new ProfileManagement(profileRepository).getProfile();
+        final Profile profile = profileManagement.getProfile();
 
-        return ResponseEntity.ok(ProfileProjection.of(profile));
+        return ResponseEntity.ok(ProfileProjection.of(getDummyProfile()));
+    }
+
+    private Profile getDummyProfile() {
+        Profile profile = new Profile();
+
+        profile.setId("myDummyId");
+        profile.setTags(Arrays.asList(
+                Tag.of(profile, "java"),
+                Tag.of(profile, "maven")));
+
+        return profile;
     }
 
     @ExceptionHandler(ProfileManagement.InvalidUsernameException.class)
