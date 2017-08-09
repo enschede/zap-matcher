@@ -25,7 +25,8 @@ databaseChangeLog:
                   name: roles
                   type: varchar(255)
         - sql:
-            sql: insert into user (id, emailaddress, password, roles) values ('admin','admin@zzpmatcher.nl','$2a$10$F6q6X3ecZqU2rNSSdCQhsuBnWCosrHhuFRIjQPVN3cd0K0odFxSEu','ROLE_USER,ROLE_ADMIN')
+            # Wachtwoord is 'hallo'
+            sql: insert into user (id, emailaddress, password, roles) values ('admin','admin@zzpmatcher.nl','$2a$10$aLMsxpkhMuwMDJ9y1Kez5.Azzm9/F0wfT4QoONBLy94qQzzvi/EIS','ROLE_USER,ROLE_ADMIN')
 
   - changeSet:
       id: 2
