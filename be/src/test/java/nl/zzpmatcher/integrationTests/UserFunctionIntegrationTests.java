@@ -161,7 +161,7 @@ public class UserFunctionIntegrationTests {
     }
 
     private UpdateProfileCommand buildUpdateProfileCommand(String username, String... tags) {
-        return UpdateProfileCommand.of(username, tags);
+        return UpdateProfileCommand.Companion.of(username, tags);
     }
 
     private UserLoginCommand buidUserLoginCommand(String username, String password) {
@@ -208,4 +208,28 @@ public class UserFunctionIntegrationTests {
                 "http://localhost:" + port + "/user/profile", HttpMethod.GET, requestEntity, ProfileResponse.class);
     }
 
+
+    private static class ProfileResponse {
+        private String username;
+        private String[] tags;
+
+        public ProfileResponse() {
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String[] getTags() {
+            return tags;
+        }
+
+        public void setTags(String[] tags) {
+            this.tags = tags;
+        }
+    }
 }
