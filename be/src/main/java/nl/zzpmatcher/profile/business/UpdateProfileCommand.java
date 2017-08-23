@@ -12,7 +12,7 @@ public class UpdateProfileCommand {
         this.tags = tags;
     }
 
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -20,7 +20,7 @@ public class UpdateProfileCommand {
         this.username = username;
     }
 
-    String[] getTags() {
+    public String[] getTags() {
         return tags;
     }
 
