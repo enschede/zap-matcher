@@ -1,14 +1,11 @@
 package nl.zzpmatcher.profile.business;
 
-import lombok.Data;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@Data
 @Entity
 public class Profile {
     @Id
@@ -16,4 +13,19 @@ public class Profile {
     @OneToMany(mappedBy = "profile", cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<Tag> tags;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }

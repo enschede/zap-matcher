@@ -1,10 +1,14 @@
 package nl.zzpmatcher.userlogon.controller;
 
-import lombok.Data;
-
-@Data
 public class UserEmailaddressOnlyProjection {
 
     private final String emailaddress;
 
+    UserEmailaddressOnlyProjection(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
+    public String getEmailaddress() {
+        return emailaddress;
+    }
 }

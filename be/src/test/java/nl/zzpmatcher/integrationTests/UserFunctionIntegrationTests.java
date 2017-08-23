@@ -1,6 +1,5 @@
 package nl.zzpmatcher.integrationTests;
 
-import lombok.Data;
 import nl.zzpmatcher.profile.business.UpdateProfileCommand;
 import nl.zzpmatcher.profile.controller.ProfileRepository;
 import nl.zzpmatcher.userlogon.business.UserLoginCommand;
@@ -116,7 +115,6 @@ public class UserFunctionIntegrationTests {
     }
 
     @Test
-//    @Ignore
     public void successfulUserProfileRead() {
         final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",
@@ -210,13 +208,4 @@ public class UserFunctionIntegrationTests {
                 "http://localhost:" + port + "/user/profile", HttpMethod.GET, requestEntity, ProfileResponse.class);
     }
 
-    @Data
-    public static class ProfileResponse {
-        private String username;
-        private String[] tags;
-
-        public ProfileResponse() {
-            super();
-        }
-    }
 }

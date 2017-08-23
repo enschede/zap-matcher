@@ -1,15 +1,26 @@
 package nl.zzpmatcher.profile.controller;
 
-import lombok.Data;
 import nl.zzpmatcher.profile.business.Profile;
 import nl.zzpmatcher.profile.business.Tag;
 
-@Data
 public class ProfileProjection {
     private final String username;
     private final String[] tags;
 
-    public static ProfileProjection of(Profile profile) {
+    private ProfileProjection(String username, String[] tags) {
+        this.username = username;
+        this.tags = tags;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    static ProfileProjection of(Profile profile) {
         if(profile==null)
             return null;
 
