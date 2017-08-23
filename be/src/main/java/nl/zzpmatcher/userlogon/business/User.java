@@ -1,4 +1,4 @@
-package nl.zzpmatcher.userLogon.business;
+package nl.zzpmatcher.userlogon.business;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package nl.zzpmatcher.userLogon.controller;
+package nl.zzpmatcher.userlogon.controller;
 
 import lombok.Data;
 

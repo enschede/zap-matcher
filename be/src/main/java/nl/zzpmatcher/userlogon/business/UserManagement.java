@@ -1,4 +1,4 @@
-package nl.zzpmatcher.userLogon.business;
+package nl.zzpmatcher.userlogon.business;
 
 import static nl.zzpmatcher.utils.Validator.validate;
 

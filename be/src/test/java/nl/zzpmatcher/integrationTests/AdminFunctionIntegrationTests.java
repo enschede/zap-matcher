@@ -1,8 +1,7 @@
 package nl.zzpmatcher.integrationTests;
 
-import nl.zzpmatcher.userLogon.business.UserLoginCommand;
+import nl.zzpmatcher.userlogon.business.UserLoginCommand;
 import org.hamcrest.CoreMatchers;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,8 @@ public class AdminFunctionIntegrationTests {
 	private TestRestTemplate testRestTemplate ;
 
 	@Test
-	@Ignore
 	public void successfulLoginAsAdmin() {
-		final ResponseEntity<LoginResponse> objectResponseEntity = login("admin@zzpmatcher.nl", "test");
+		final ResponseEntity<LoginResponse> objectResponseEntity = login("admin@zzpmatcher.nl", "hallo");
 
 		assertThat(objectResponseEntity.getBody().getEmailaddress(), equalTo("admin@zzpmatcher.nl"));
 		assertThat(objectResponseEntity.getStatusCode().value(), equalTo(200));
@@ -48,9 +46,8 @@ public class AdminFunctionIntegrationTests {
 	}
 
 	@Test
-	@Ignore
 	public void successfulFetchOfUsers() {
-		final ResponseEntity<LoginResponse> loginResponseResponseEntity = login("admin@zzpmatcher.nl", "test");
+		final ResponseEntity<LoginResponse> loginResponseResponseEntity = login("admin@zzpmatcher.nl", "hallo");
 		final String cookie = getCookieFromResponse(loginResponseResponseEntity);
 
 		ResponseEntity<LinkedHashMap> userList = getUserlist(cookie);

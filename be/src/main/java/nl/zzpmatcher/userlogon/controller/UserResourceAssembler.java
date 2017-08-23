@@ -1,6 +1,6 @@
-package nl.zzpmatcher.userLogon.controller;
+package nl.zzpmatcher.userlogon.controller;
 
-import nl.zzpmatcher.userLogon.business.User;
+import nl.zzpmatcher.userlogon.business.User;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.hateoas.Resources;

@@ -2,7 +2,6 @@ package nl.zzpmatcher.profile.controller;
 
 import nl.zzpmatcher.profile.business.Profile;
 import nl.zzpmatcher.profile.business.ProfileManagement;
-import nl.zzpmatcher.profile.business.Tag;
 import nl.zzpmatcher.profile.business.UpdateProfileCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 @RestController
 public class ProfileController {
@@ -36,18 +34,7 @@ public class ProfileController {
 
         final Profile profile = profileManagement.getProfile();
 
-        return ResponseEntity.ok(ProfileProjection.of(getDummyProfile()));
-    }
-
-    private Profile getDummyProfile() {
-        Profile profile = new Profile();
-
-        profile.setId("myDummyId");
-        profile.setTags(Arrays.asList(
-                Tag.of(profile, "java"),
-                Tag.of(profile, "maven")));
-
-        return profile;
+        return ResponseEntity.ok(ProfileProjection.of(profile));
     }
 
     @ExceptionHandler(ProfileManagement.InvalidUsernameException.class)

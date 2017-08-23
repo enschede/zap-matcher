@@ -1,4 +1,4 @@
-package nl.zzpmatcher.userLogon.security;
+package nl.zzpmatcher.userlogon.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/public/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/controller/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .csrf().disable();

@@ -3,10 +3,9 @@ package nl.zzpmatcher.integrationTests;
 import lombok.Data;
 import nl.zzpmatcher.profile.business.UpdateProfileCommand;
 import nl.zzpmatcher.profile.controller.ProfileRepository;
-import nl.zzpmatcher.userLogon.business.UserLoginCommand;
-import nl.zzpmatcher.userLogon.business.UserManagementTest;
-import nl.zzpmatcher.userLogon.business.UserRegisterCommand;
-import org.junit.Ignore;
+import nl.zzpmatcher.userlogon.business.UserLoginCommand;
+import nl.zzpmatcher.userlogon.business.UserManagementTest;
+import nl.zzpmatcher.userlogon.business.UserRegisterCommand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +116,7 @@ public class UserFunctionIntegrationTests {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void successfulUserProfileRead() {
         final ResponseEntity<AdminFunctionIntegrationTests.LoginResponse> registerResponse = this.testRestTemplate.postForEntity(
                 "http://localhost:" + port + "/public/createUser",

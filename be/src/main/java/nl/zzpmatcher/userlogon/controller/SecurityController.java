@@ -1,6 +1,6 @@
-package nl.zzpmatcher.userLogon.controller;
+package nl.zzpmatcher.userlogon.controller;
 
-import nl.zzpmatcher.userLogon.business.UserLoginCommand;
+import nl.zzpmatcher.userlogon.business.UserLoginCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpEntity;
