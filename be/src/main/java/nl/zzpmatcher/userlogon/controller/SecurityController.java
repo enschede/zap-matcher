@@ -22,6 +22,7 @@ public class SecurityController {
         this.authenticationManager = authenticationManager;
     }
 
+    @CrossOrigin(origins = "${zzpmatcher.cors.allowed.origin}")
     @PostMapping("/public/login")
     public HttpEntity login(@RequestBody UserLoginCommand userLoginCommand) {
         UsernamePasswordAuthenticationToken token =
@@ -40,11 +41,12 @@ public class SecurityController {
         }
     }
 
+    @CrossOrigin(origins = "${zzpmatcher.cors.allowed.origin}")
     @GetMapping("/user/logout")
     public HttpEntity logout() {
         SecurityContextHolder.clearContext();
 
-        Resource<String> resource = new Resource("");
+        Resource<String> resource = new Resource<>("");
         UserResourceAssembler.addLoginLink(resource);
         return ResponseEntity.ok(resource);
     }

@@ -36,6 +36,7 @@ public class UserController {
 
     }
 
+    @CrossOrigin(origins = "${zzpmatcher.cors.allowed.origin}")
     @PostMapping("/public/createUser")
     public Resource postCreateUser(@RequestBody UserRegisterCommand userRegisterCommand) {
 
@@ -44,6 +45,7 @@ public class UserController {
         return userResourceAssembler.toEmailAddressOnlyProjection(createdUser);
     }
 
+    @CrossOrigin(origins = "${zzpmatcher.cors.allowed.origin}")
     @GetMapping("/admin/user")
     public HttpEntity<Resources<User>> getUser() {
 
@@ -54,9 +56,9 @@ public class UserController {
     }
 
     // TODO: voor debug acties, daarna verwijderen
+    @CrossOrigin(origins = "${zzpmatcher.cors.allowed.origin}")
     @GetMapping("/public/all")
     public Iterable<User> getAllProfiles() {
-        final Iterable<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 }
