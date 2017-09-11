@@ -1,21 +1,20 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {RegistrationService, RememberMeService} from '../../service/index';
-import {UserRegisterCommand} from '../../command/index';
-import {Subscription} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {ApplicationState} from '../../store/application-state';
+import {RegistrationStartedAction} from '../../store/account/account-actions';
+import {RegistrationCommand} from '../../store/account/account-commands';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnDestroy {
+export class RegistrationComponent {
   form: FormGroup;
-  registrationSubscription: Subscription;
 
-  constructor(private registrationService: RegistrationService,
-              private rememberMeService: RememberMeService,
+  constructor(private store: Store<ApplicationState>,
               private router: Router) {
 
     this.form = new FormGroup({
@@ -27,27 +26,18 @@ export class RegistrationComponent implements OnDestroy {
 
   onSubmit(): boolean {
     if (this.form.valid) {
-      const command = new UserRegisterCommand(
-        this.form.value['emailaddress'],
-        this.form.value['password'],
-        this.form.value['password2']
+      const action = new RegistrationStartedAction(
+        new RegistrationCommand(
+          this.form.value['emailaddress'],
+          this.form.value['password'],
+          this.form.value['password2']
+        )
       );
-      console.log('Submitting' + command);
-      this.registrationSubscription =
-        this.registrationService.register(command).subscribe((json: any) => {
-          this.rememberMeService.rememberUsername(json.emailaddress);
-          this.rememberMeService.rememberPassword(command.password);
-          this.router.navigate(['login']);
-        });
+      console.log('Submitting' + action);
+      this.store.dispatch(action);
+          // this.router.navigate(['login']);
     }
 
     return false;
-  }
-
-  ngOnDestroy() {
-    if (this.registrationSubscription) {
-      this.registrationSubscription.unsubscribe();
-      this.registrationSubscription = null;
-    }
   }
 }

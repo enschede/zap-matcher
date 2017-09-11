@@ -1,26 +1,25 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginService, RememberMeService} from '../../service/index';
-import {UserLoginCommand} from '../../command/index';
-import {Subscription} from 'rxjs';
+import {ApplicationState} from '../../store/application-state';
+import {Store} from '@ngrx/store';
+import {LoginCommand} from '../../store/account/account-commands';
+import {LoginStartedAction} from '../../store/account/account-actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnDestroy, OnInit {
+export class LoginComponent implements OnInit {
   form: FormGroup;
-  loginSubscription: Subscription;
   @Input() autoLogin = false;
   autofill = false;
 
-  constructor(private loginService: LoginService,
-              private rememberMeService: RememberMeService,
+  constructor(private store: Store<ApplicationState>,
               private router: Router) {
-    const username = this.rememberMeService.recallUsername();
-    const password = this.rememberMeService.recallPassword();
+    const username = undefined; // this.rememberMeService.recallUsername();
+    const password = undefined;
     this.autofill = !!username && !!password;
 
     this.form = new FormGroup({
@@ -31,19 +30,14 @@ export class LoginComponent implements OnDestroy, OnInit {
 
   onSubmit(): boolean {
     if (this.form.valid) {
-      const command = new UserLoginCommand(
-        this.form.value['username'],
-        this.form.value['password']
+      const action = new LoginStartedAction(new LoginCommand(
+          this.form.value['username'],
+          this.form.value['password']
+        )
       );
-      console.log('Submitting' + command);
-      this.loginSubscription =
-        this.loginService.login(command).subscribe((json: any) => {
-          if (!this.autoLogin) {
-            this.rememberMeService.rememberUsername(command.username);
-            this.rememberMeService.rememberPassword(command.password);
-          }
-          this.router.navigate(['account']);
-        });
+      console.log('Submitting' + action);
+      this.store.dispatch(action);
+      this.router.navigate(['account']);
     }
 
     return false;
@@ -54,12 +48,4 @@ export class LoginComponent implements OnDestroy, OnInit {
       this.onSubmit();
     }
   }
-
-  ngOnDestroy() {
-    if (this.loginSubscription) {
-      this.loginSubscription.unsubscribe();
-      this.loginSubscription = null;
-    }
-  }
-
 }

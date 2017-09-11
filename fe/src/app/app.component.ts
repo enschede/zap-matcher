@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Store} from '@ngrx/store';
+import {ApplicationState} from '../store/application-state';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private store: Store<ApplicationState>) {
+
+    store.subscribe(console.log);
+  }
 }
