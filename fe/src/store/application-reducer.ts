@@ -1,21 +1,8 @@
-import {Action} from '@ngrx/store';
-import {ApplicationState, INITIAL_APPLICATION_STATE} from './application-state';
-import {REGISTRATION_SUCCEEDED_ACTION, RegistrationSucceededAction} from './account/account-actions';
+import {ActionReducer, combineReducers} from '@ngrx/store';
+import {ApplicationState} from './application-state';
+import {account} from './account/account-reducer';
+import {profile} from './profile/profile-reducer';
 
 
-export function applicationReducer(state: ApplicationState = INITIAL_APPLICATION_STATE, action: Action): ApplicationState {
+export const application: ActionReducer<ApplicationState> = combineReducers({account, profile});
 
-  switch (action.type) {
-    case REGISTRATION_SUCCEEDED_ACTION:
-      return handleRegistrationSucceededAction(state, <any>action);
-
-    default:
-      return state;
-  }
-}
-
-function handleRegistrationSucceededAction(state: ApplicationState, action: RegistrationSucceededAction): ApplicationState {
-
-  const newState = Object.assign({}, state);
-  return newState;
-}

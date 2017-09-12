@@ -1,4 +1,6 @@
-import {Action} from '@ngrx/store';
+import {Action, ActionReducer} from '@ngrx/store';
+import {LOGIN_STARTED_ACTION, LOGIN_SUCCEEDED_ACTION} from './account-actions';
+import {AccountState, INITIAL_ACCOUNT_STATE} from './account-state';
 
 const accountLoginStarted = (state, action: Action) => {
   return Object.assign({}, state, {isLoggingIn: true});
@@ -12,12 +14,12 @@ const accountLoginFailed = (state, action: Action) => {
   return Object.assign({}, state, {isLoggingIn: false});
 };
 
-export const account = (state = {}, action: Action = {type: '', payload: 0}) => {
+export const account: ActionReducer<AccountState> = (state = INITIAL_ACCOUNT_STATE, action: Action) => {
   switch (action.type) {
-    case 'ACCOUNT_LOGIN_STARTED':
+    case LOGIN_STARTED_ACTION:
       return accountLoginStarted(state, action);
 
-    case 'ACCOUNT_LOGIN_SUCCEEDED':
+    case LOGIN_SUCCEEDED_ACTION:
       return accountLoginSucceeded(state, action);
 
     case 'ACCOUNT_LOGIN_FAILED':

@@ -8,8 +8,12 @@ import {LoginService, ProfileService, RegistrationService} from '../service/inde
 import {AccountPageComponent, LoginPageComponent, WelcomePageComponent} from '../page/index';
 import {LoginComponent, RegistrationComponent} from '../component/index';
 import {appRoutingProviders, routing} from './app.routes';
-import {StoreModule} from '@ngrx/store';
-import {applicationReducer} from '../store/application-reducer';
+import {combineReducers, StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {LoginEffectsService} from '../store/effects/login-effects.service';
+import {RegistrationEffectsService} from '../store/effects/registration-effects.service';
+import {account} from '../store/account/account-reducer';
+import {profile} from '../store/profile/profile-reducer';
 
 const PROVIDERS = [
   appRoutingProviders,
@@ -32,7 +36,9 @@ const PROVIDERS = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    StoreModule.provideStore(applicationReducer),
+    StoreModule.provideStore(),
+    EffectsModule.run(LoginEffectsService),
+    EffectsModule.run(RegistrationEffectsService),
     routing
   ],
   providers: PROVIDERS,
