@@ -11,6 +11,8 @@ export class LoginEffectsService {
 
   @Effect() loginActions$: Observable<Action> = this.actions$
     .ofType(LOGIN_STARTED_ACTION)
+    .do(action => console.log(action))
     .switchMap(action => this.loginService.login(action.payload))
+    .do(result => console.log(result))
     .map(result => new LoginSucceededAction(result));
 }

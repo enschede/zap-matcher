@@ -3,8 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {ApplicationState} from '../../store/application-state';
-import {RegistrationStartedAction} from '../../store/account/account-actions';
-import {RegistrationCommand} from '../../store/account/account-commands';
+import {RegistrationStartedAction, RegistrationStartedPayload} from '../../store/registration/registration-actions';
 
 @Component({
   selector: 'app-registration',
@@ -27,13 +26,12 @@ export class RegistrationComponent {
   onSubmit(): boolean {
     if (this.form.valid) {
       const action = new RegistrationStartedAction(
-        new RegistrationCommand(
+        new RegistrationStartedPayload(
           this.form.value['emailaddress'],
           this.form.value['password'],
           this.form.value['password2']
         )
       );
-      console.log('Submitting' + action);
       this.store.dispatch(action);
           // this.router.navigate(['login']);
     }

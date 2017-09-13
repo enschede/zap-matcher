@@ -10,6 +10,6 @@ import {ApplicationState} from '../store/application-state';
 export class AppComponent {
   constructor(private store: Store<ApplicationState>) {
 
-    store.subscribe(console.log);
+    store.subscribe(state => console.log('New state:', state));
   }
 }

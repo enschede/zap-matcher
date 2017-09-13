@@ -1,10 +1,9 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApplicationState} from '../../store/application-state';
 import {Store} from '@ngrx/store';
-import {LoginCommand} from '../../store/account/account-commands';
-import {LoginStartedAction} from '../../store/account/account-actions';
+import {LoginStartedAction, LoginStartedPayload} from '../../store/account/account-actions';
 
 @Component({
   selector: 'app-login',
@@ -30,14 +29,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): boolean {
     if (this.form.valid) {
-      const action = new LoginStartedAction(new LoginCommand(
+      const action = new LoginStartedAction(new LoginStartedPayload(
           this.form.value['username'],
           this.form.value['password']
         )
       );
-      console.log('Submitting' + action);
       this.store.dispatch(action);
-      this.router.navigate(['account']);
+      // this.router.navigate(['account']);
     }
 
     return false;
