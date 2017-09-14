@@ -17,6 +17,7 @@ import {application} from '../store/application-reducer';
 import {INITIAL_APPLICATION_STATE} from '../store/application-state';
 import {storeFreeze} from 'ngrx-store-freeze';
 import {environment} from '../environments/environment';
+import {RouterStoreModule} from "@ngrx/router-store";
 
 const PROVIDERS = [
   appRoutingProviders,
@@ -30,7 +31,7 @@ export function applicationReducer(state: any = INITIAL_APPLICATION_STATE, actio
   if (environment.production) {
     return combinedReducers;
   }
-  return compose(storeFreeze, combinedReducers);
+  return combinedReducers; //compose(storeFreeze, combinedReducers);
 }
 
 @NgModule({
@@ -50,6 +51,7 @@ export function applicationReducer(state: any = INITIAL_APPLICATION_STATE, actio
     StoreModule.provideStore(applicationReducer),
     EffectsModule.run(LoginEffectsService),
     EffectsModule.run(RegistrationEffectsService),
+    RouterStoreModule.connectRouter(),
     routing
   ],
   providers: PROVIDERS,

@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {ApplicationState} from '../../store/application-state';
 import {RegistrationStartedAction, RegistrationStartedPayload} from '../../store/registration/registration-actions';
@@ -13,8 +12,7 @@ import {RegistrationStartedAction, RegistrationStartedPayload} from '../../store
 export class RegistrationComponent {
   form: FormGroup;
 
-  constructor(private store: Store<ApplicationState>,
-              private router: Router) {
+  constructor(private store: Store<ApplicationState>) {
 
     this.form = new FormGroup({
       emailaddress: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.email]),
@@ -33,7 +31,6 @@ export class RegistrationComponent {
         )
       );
       this.store.dispatch(action);
-          // this.router.navigate(['login']);
     }
 
     return false;

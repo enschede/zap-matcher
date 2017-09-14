@@ -12,7 +12,7 @@ export class RegistrationService {
   constructor(private http: Http) {}
 
   register(command: RegistrationStartedPayload): Observable<any> {
-    return this.http.post(environment.apiUrl + '/public/createUser', commonHttpHeaders(), command)
+    return this.http.post(environment.apiUrl + '/public/createUser', command, commonHttpHeaders())
       .map((res: Response) => res.json());
   }
 

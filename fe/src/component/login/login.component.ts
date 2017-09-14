@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
         )
       );
       this.store.dispatch(action);
-      // this.router.navigate(['account']);
     }
 
     return false;
