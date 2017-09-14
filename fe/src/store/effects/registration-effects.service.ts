@@ -3,7 +3,10 @@ import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {RegistrationService} from '../../service/registration/registration.service';
-import {REGISTRATION_STARTED_ACTION, RegistrationSucceededAction} from '../registration/registration-actions';
+import {
+  REGISTRATION_STARTED_ACTION, RegistrationFailedAction,
+  RegistrationSucceededAction
+} from '../registration/registration-actions';
 
 @Injectable()
 export class RegistrationEffectsService {
@@ -14,5 +17,6 @@ export class RegistrationEffectsService {
     .do(action => console.log(action))
     .switchMap(action => this.registrationService.register(action.payload))
     .do(result => console.log(result))
-    .map(result => new RegistrationSucceededAction(result));
+    .map(result => new RegistrationSucceededAction(result))
+    .catch(error => Observable.of(new RegistrationFailedAction(error)));
 }

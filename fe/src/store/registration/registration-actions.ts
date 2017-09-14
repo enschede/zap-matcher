@@ -14,8 +14,8 @@ export class RegistrationStartedAction implements Action {
 
 export const REGISTRATION_SUCCEEDED_ACTION = 'REGISTRATION_SUCCEEDED_ACTION';
 
-export class RegistrationSucceededPayload {
-  constructor(public emailaddress: string) {}
+export interface RegistrationSucceededPayload {
+  emailaddress: string;
 }
 
 export class RegistrationSucceededAction implements Action {

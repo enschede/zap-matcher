@@ -15,8 +15,8 @@ export class LoginStartedAction implements Action {
 
 export const LOGIN_SUCCEEDED_ACTION = 'LOGIN_SUCCEEDED_ACTION';
 
-export class LoginSucceededPayload {
-  constructor(public emailaddress: string) {}
+export interface LoginSucceededPayload {
+  emailaddress: string;
 }
 
 export class LoginSucceededAction implements Action {
