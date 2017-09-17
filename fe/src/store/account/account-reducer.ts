@@ -16,7 +16,7 @@ const loginStartedAction: ActionReducer<AccountState> = (state: AccountState, ac
 const loginSucceededAction: ActionReducer<AccountState> = (state: AccountState, action: LoginSucceededAction) => {
   return Object.assign({}, state, {
     isLoggingIn: false,
-    loginSuccess: true,
+    isAuthenticated: true,
     emailAddress: action.payload.emailaddress
   });
 };
@@ -24,7 +24,7 @@ const loginSucceededAction: ActionReducer<AccountState> = (state: AccountState, 
 const loginFailedAction: ActionReducer<AccountState> = (state: AccountState, action: LoginFailedAction) => {
   return Object.assign({}, state, {
     isLoggingIn: false,
-    loginSuccess: true,
+    isAuthenticated: false,
     username: undefined,
     emailAddress: undefined
   });

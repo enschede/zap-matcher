@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {ApplicationState} from '../../store/application-state';
@@ -7,7 +7,8 @@ import {RegistrationStartedAction, RegistrationStartedPayload} from '../../store
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationComponent {
   form: FormGroup;
