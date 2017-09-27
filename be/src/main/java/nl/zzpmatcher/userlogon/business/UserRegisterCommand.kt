@@ -12,6 +12,6 @@ class UserRegisterCommand {
 
         val encodedPassword = BCryptPasswordEncoder().encode(password!!)
 
-        return User.create(emailaddress!!, encodedPassword, "ROLE_USER")
+        return User(emailaddress = emailaddress!!, password =  encodedPassword, roles = "ROLE_USER")
     }
 }

@@ -7,10 +7,9 @@ object ProfileBuilder {
 
     fun build(updateProfileCommand: UpdateProfileCommand): Profile {
 
-        val profile = Profile()
-        profile.id = updateProfileCommand.username
+        val profile = Profile(id = updateProfileCommand.username)
 
-        val tagList = Arrays.stream(updateProfileCommand.tags).map { tag -> Tag.of(profile, tag) }.toList()
+        val tagList = updateProfileCommand.tags?.map { tag -> Tag(id = tag, profile = profile) }?.toList()
 
         profile.tags = tagList
 

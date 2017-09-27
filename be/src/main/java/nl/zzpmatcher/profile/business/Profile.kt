@@ -6,9 +6,7 @@ import javax.persistence.Id
 import javax.persistence.OneToMany
 
 @Entity
-class Profile {
-    @Id
-    var id: String? = null
-    @OneToMany(mappedBy = "profile", cascade = arrayOf(CascadeType.ALL), orphanRemoval = true)
-    var tags: List<Tag>? = null
-}
+class Profile(
+    @Id var id: String? = null,
+    @OneToMany(mappedBy = "profile", cascade = arrayOf(CascadeType.ALL), orphanRemoval = true) var tags: List<Tag>? = null
+)
