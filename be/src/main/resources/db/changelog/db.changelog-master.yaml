@@ -26,7 +26,10 @@ databaseChangeLog:
                   type: varchar(255)
         - sql:
             # Wachtwoord is 'hallo'
-            sql: insert into user (id, emailaddress, password, roles) values ('admin','admin@zzpmatcher.nl','$2a$10$aLMsxpkhMuwMDJ9y1Kez5.Azzm9/F0wfT4QoONBLy94qQzzvi/EIS','ROLE_USER,ROLE_ADMIN')
+            sql: insert into user (id, emailaddress, password, roles) values ('admin-daf33','admin@zzpmatcher.nl','$2a$10$aLMsxpkhMuwMDJ9y1Kez5.Azzm9/F0wfT4QoONBLy94qQzzvi/EIS','ROLE_USER,ROLE_ADMIN')
+        - sql:
+            # Wachtwoord is 'hallo'
+            sql: insert into user (id, emailaddress, password, roles) values ('dummy-abc17','dummy@dummy.com','$2a$10$aLMsxpkhMuwMDJ9y1Kez5.Azzm9/F0wfT4QoONBLy94qQzzvi/EIS','ROLE_USER')
 
   - changeSet:
       id: 2
@@ -68,4 +71,10 @@ databaseChangeLog:
             referencedTableName: profile
 
         - sql:
-            sql: insert into profile (id, emailaddress) values ('admin','admin@zzpmatcher.nl')
+            sql: insert into profile (id, emailaddress) values ('admin-daf33','admin@zzpmatcher.nl')
+        - sql:
+            sql: insert into profile (id, emailaddress) values ('dummy-abc17','dummy@dummy.com')
+        - sql:
+            sql: insert into tag (id, profile_id, name) values ('dummy1','dummy-abc17','java')
+        - sql:
+            sql: insert into tag (id, profile_id, name) values ('dummy2','dummy-abc17','maven')
