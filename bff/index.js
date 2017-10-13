@@ -4,9 +4,9 @@ const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxy();
 
 const hosts = [
-    {host: 'local.zzpmatcher.nl:8080', path: 'public', target: 'http://localhost:8080'},
-    {host: 'local.zzpmatcher.nl:8080', path: 'user', target: 'http://localhost:8080'},
-    {host: 'local.zzpmatcher.nl:8080', path: '', target: 'http://localhost:4200'},
+    {host: 'local.zzpmatcher.nl', path: 'public', target: 'http://localhost:8080'},
+    {host: 'local.zzpmatcher.nl', path: 'user', target: 'http://localhost:8080'},
+    {host: 'local.zzpmatcher.nl', path: '', target: 'http://localhost:4200'},
 ]
 
 const server = http.createServer((req, res) => {
@@ -17,5 +17,5 @@ const server = http.createServer((req, res) => {
     proxy.web(req, res, {target: host.target});
 });
 
-server.listen(8080);
+server.listen(80);
 
