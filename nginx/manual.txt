@@ -5,7 +5,7 @@ Source: http://learnaholic.me/2012/10/10/installing-nginx-in-mac-os-x-mountain-l
 2. brew install nginx
 3. sudo nginx
 4. sudo nginx -s stop
-
+5. Edit /usr/local/etc/nginx/nginx.conf
 
 Virtual host configuration:
 
